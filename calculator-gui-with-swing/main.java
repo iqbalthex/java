@@ -1,36 +1,48 @@
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class Main implements ActionListener{
-	private static JFrame window;
-	private static Main listener;
+	private static JFrame window; // window utama
+	private static Main listener; // objek agar tombol melakukan sesuatu ketika diklik
 	private static int gap = 10;
 
 	public void actionPerformed(ActionEvent e){
-		// fungsi ketika tombol diklik
+		// method atau fungsi ketika tombol diklik
 		System.out.println("Kamu menekan tombol " + e.getActionCommand());
 	}
 
-	public static JButton add_button(String text, int row, int col, int w_ratio, int h_ratio){
+
+	// method atau fungsi untuk mempermudah pembuatan tombol
+	public static void add_button(String text, int row, int col, int w_ratio, int h_ratio){
+		JButton b = new JButton(text);
+
+
+		// pengaturan ukuran dan posisi tombol
 		int x = (col * (50 + gap)) + gap;
 		int y = (row * (50 + gap)) + gap;
 		int w = (w_ratio * 50) + (gap * (w_ratio - 1));
 		int h = (h_ratio * 50) + (gap * (h_ratio - 1));
 
-		JButton b = new JButton(text);
 
+		// mengatur tombol (posisi x, posisi y, lebar, tinggi)
 		b.setBounds(x, y, w, h);
+
+
+		// memasangkan tombol ke method atau fungsi (actionPerformed)
 		b.addActionListener(listener);
 
-		window.add(b);
 
-		return b;
+		// menambahkan tombol ke window utama
+		window.add(b);
 	}
 
 	public static void main(String args[]){
 		window = new JFrame("Kalkulator Sederhana");
 		listener = new Main();
+
 
 		// add_button(teks, baris, kolom, lebar, tinggi)
 		add_button("hasil", 0, 0, 4, 1);
@@ -55,10 +67,7 @@ public class Main implements ActionListener{
 		add_button("=", 4, 2, 1, 1);
 		add_button("+", 4, 3, 1, 1);
 
-		// add_button("4", "5", "6", "*");
-		// add_button("1", "2", "3", "-");
-
-		window.setSize(280,350);
+		window.setSize(270,350);
 		window.setLayout(null);
 		window.setVisible(true);
 	}
